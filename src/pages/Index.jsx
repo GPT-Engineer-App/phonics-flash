@@ -25,6 +25,7 @@ const Index = () => {
 
   const handleNextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    setPronunciationMatch(null);
   };
 
   const handleSliderChange = (value) => {
@@ -74,6 +75,16 @@ const Index = () => {
 
     recognizer.start();
   };
+
+  {pronunciationMatch !== null && (
+    <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="md" width="100%" textAlign="center" display="flex" alignItems="center" justifyContent="center">
+      {pronunciationMatch ? (
+        <FaCheckCircle size="24px" color="green" />
+      ) : (
+        <FaTimesCircle size="24px" color="red" />
+      )}
+    </Box>
+  )}
 
   const currentCard = flashcards[currentCardIndex];
   const highlightedWord = currentCard.word.split("").map((letter, index) => (
