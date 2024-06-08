@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { FaVolumeUp, FaMicrophone } from "react-icons/fa";
-import { Box, Button, Container, Text, VStack, Slider, SliderTrack, SliderFilledTrack, SliderThumb } from "@chakra-ui/react";
+import { Box, Button, Container, Text, VStack, Slider, SliderTrack, SliderFilledTrack, SliderThumb, Flex, Spacer } from "@chakra-ui/react";
 
 const flashcards = [
   { id: 1, word: "cat", phonics: "c-a-t" },
@@ -61,13 +61,21 @@ const Index = () => {
 
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="md" width="100%" textAlign="center" display="flex" alignItems="center" justifyContent="center">
-          <Text fontSize="3xl" mb={2} mr={2}>{highlightedWord}</Text>
-          <FaVolumeUp size="24px" cursor="pointer" onClick={() => speakWord(currentCard.word)} />
-          <FaMicrophone size="24px" cursor="pointer" color={isRecording ? "red" : "black"} onClick={handleStartRecording} />
-          <Text fontSize="xl" color="gray.500">{currentCard.phonics}</Text>
-        </Box>
+      <VStack spacing={4} width="100%">
+        <Flex direction="column" align="center" width="100%">
+          <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="md" width="100%" textAlign="center" display="flex" alignItems="center" justifyContent="center">
+            <FaVolumeUp size="24px" cursor="pointer" onClick={() => speakWord(currentCard.word)} />
+          </Box>
+          <Spacer />
+          <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="md" width="100%" textAlign="center" display="flex" alignItems="center" justifyContent="center">
+            <Text fontSize="3xl" mb={2} mr={2}>{highlightedWord}</Text>
+            <Text fontSize="xl" color="gray.500">{currentCard.phonics}</Text>
+          </Box>
+          <Spacer />
+          <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="md" width="100%" textAlign="center" display="flex" alignItems="center" justifyContent="center">
+            <FaMicrophone size="24px" cursor="pointer" color={isRecording ? "red" : "black"} onClick={handleStartRecording} />
+          </Box>
+        </Flex>
         <Slider aria-label="slider-ex-1" defaultValue={0} min={0} max={currentCard.word.length} onChange={handleSliderChange}>
           <SliderTrack>
             <SliderFilledTrack />
@@ -75,7 +83,7 @@ const Index = () => {
           <SliderThumb />
         </Slider>
         <Button colorScheme="teal" onClick={handleNextCard}>Next</Button>
-      {audioURL && (
+        {audioURL && (
           <audio controls src={audioURL} />
         )}
       </VStack>
