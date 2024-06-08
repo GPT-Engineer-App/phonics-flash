@@ -25,6 +25,7 @@ const Index = () => {
 
   const handleNextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    setPronunciationMatch(null);
   };
 
   const handleSliderChange = (value) => {
