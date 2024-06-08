@@ -67,10 +67,12 @@ const Index = () => {
     recognizer.onerror = () => {
       setPronunciationMatch(false);
     };
-    recognizer.start();
+
     const audioUrl = URL.createObjectURL(audioBlob);
     const audio = new Audio(audioUrl);
     audio.play();
+
+    recognizer.start();
   };
 
   const currentCard = flashcards[currentCardIndex];
